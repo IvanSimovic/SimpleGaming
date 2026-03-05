@@ -12,6 +12,7 @@ plugins {
     alias(libs.plugins.test.logger) apply false
     alias(libs.plugins.junit5.android) apply false
     alias(libs.plugins.jetbrains.kotlin.jvm) apply false
+    alias(libs.plugins.google.services) apply false
     alias(libs.plugins.detekt)
     alias(libs.plugins.spotless)
 }

@@ -38,6 +38,8 @@ detekt = "1.23.8"
 android-gradle-plugin = "8.13.1"
 easylauncher = "6.4.1"
 aboutlibraries = "12.2.4"
+google-services = "4.4.4"
+firebase-bom = "34.9.0"
 
 # ktlint-rules
 ktlint-ruleset-standard = "1.7.1"
@@ -71,6 +73,7 @@ junit5-android = { id = "de.mannodermaus.android-junit5", version.ref = "android
 test-logger = { id = "com.adarshr.test-logger", version.ref = "test-logger" }
 compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrains-kotlin-jvm" }
+google-services = { id = "com.google.gms.google-services", version.ref = "google-services" }
 
 [libraries]
 # Gradle plugins for buildLogic module
@@ -119,6 +122,9 @@ room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
 room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
 konsist = { module = "com.lemonappdev:konsist", version.ref = "konsist" }
 datepicker = { module = "com.github.anhaki:PickTime-Compose", version = "1.1.5" }
+firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebase-bom" }
+firebase-auth = { module = "com.google.firebase:firebase-auth" }
+firebase-firestore = { module = "com.google.firebase:firebase-firestore" }
 compose-icons = { group = "androidx.compose.material", name = "material-icons-core" }
 androidx-material-icons-extended = { group = "androidx.compose.material", name = "material-icons-extended" }
 
@@ -178,6 +184,11 @@ compose = [
 room = [
     "room-ktx",
     "room-runtime"
+]
+
+firebase = [
+    "firebase-auth",
+    "firebase-firestore",
 ]
 
 test = [

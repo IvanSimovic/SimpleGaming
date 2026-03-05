@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.compose)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.kotlin.symbol.processing)
+    alias(libs.plugins.google.services)
     id("org.jetbrains.kotlin.kapt")
 }
 
@@ -115,6 +116,10 @@ dependencies {
     // Lifecycle & UI
     implementation(libs.viewmodel.ktx)
     implementation(libs.core.splashscreen)
+
+    // Firebase
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.bundles.firebase)
 
     // Date picker
     implementation(libs.datepicker)
