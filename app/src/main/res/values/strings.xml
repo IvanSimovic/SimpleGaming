@@ -29,4 +29,6 @@
     <string name="add">Add</string>
     <string name="search">Search</string>
     <string name="clear_search">Clear search</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="bottom_navigation_temp">Home</string>
 </resources>

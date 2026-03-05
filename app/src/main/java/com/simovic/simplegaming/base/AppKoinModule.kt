@@ -5,6 +5,7 @@ import com.simovic.simplegaming.BuildConfig
 import com.simovic.simplegaming.base.data.retrofit.apiresult.ApiResultAdapterFactory
 import com.simovic.simplegaming.base.data.retrofit.interceptor.AuthenticationInterceptor
 import com.simovic.simplegaming.base.data.retrofit.interceptor.UserAgentInterceptor
+import com.simovic.simplegaming.base.presentation.AppViewModel
 import com.simovic.simplegaming.base.presentation.ScaffoldController
 import com.tickaroo.tikxml.TikXml
 import com.tickaroo.tikxml.retrofit.TikXmlConverterFactory
@@ -15,6 +16,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.core.module.dsl.singleOf
 import org.koin.core.module.dsl.viewModel
+import org.koin.core.module.dsl.viewModelOf
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import retrofit2.Retrofit
@@ -26,6 +28,8 @@ val appModule =
         single { AuthenticationInterceptor(BuildConfig.apiToken) }
 
         viewModel { ScaffoldController() }
+
+        viewModelOf(::AppViewModel)
 
         singleOf(::UserAgentInterceptor)
 

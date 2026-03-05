@@ -29,9 +29,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.simovic.simplegaming.base.common.res.Dimen
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.simovic.simplegaming.R
+import com.simovic.simplegaming.base.common.res.Dimen
 import com.simovic.simplegaming.base.presentation.compose.composable.AppCheckbox
 import com.simovic.simplegaming.base.presentation.compose.composable.AppPreview
 import com.simovic.simplegaming.base.presentation.compose.composable.ErrorAnim

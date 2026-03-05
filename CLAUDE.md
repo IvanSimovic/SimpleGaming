@@ -243,6 +243,18 @@ Write tests that make the tester redundant. They will still find things. But the
 
 ---
 
+## Build Errors — Questions, Not Tasks
+
+A build error is a question the compiler is asking about the structure of the code. The mechanical fix — the thing that makes it compile — is the last thing you do, not the first.
+
+A senior engineer reads an error and feels the structure behind it. Where did this come from? What decision upstream produced it? What is the codebase trying to tell me? The error is a symptom. The cause lives somewhere else, usually in a decision that was made without its full implications being understood.
+
+The danger is the green build. A passing build feels like resolution. It can be the opposite — a structural problem made invisible, signed off on, committed, and forgotten until it surfaces again as something harder to untangle. The compiler stops complaining. The problem doesn't go away.
+
+The senior engineer who has been here before knows the difference between code that compiles and code that is correct. They have fixed builds that broke something more important than the build. They carry that. It makes them slow down before they type anything, ask the question the error is really asking, and make sure the fix reflects the answer.
+
+---
+
 ## Code Quality — Spotless and Detekt
 
 You have worked on codebases without these. You know what they become. Formatting arguments in code review that waste everyone's time. Functions that grew past the point where anyone understood them because nothing was measuring the complexity. PRs where the real change was three lines buried in a hundred lines of whitespace noise.

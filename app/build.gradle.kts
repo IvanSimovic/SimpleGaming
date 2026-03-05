@@ -16,7 +16,7 @@ android {
             .toInt()
 
     defaultConfig {
-        applicationId = "com.simovic.meappsimple"
+        applicationId = "com.simovic.simplegaming"
         minSdk =
             libs.versions.min.sdk
                 .get()
@@ -120,6 +120,7 @@ dependencies {
     // Firebase
     implementation(platform(libs.firebase.bom))
     implementation(libs.bundles.firebase)
+    implementation(libs.coroutines.play.services)
 
     // Date picker
     implementation(libs.datepicker)

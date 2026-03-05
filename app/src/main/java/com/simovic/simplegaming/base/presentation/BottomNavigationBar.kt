@@ -72,19 +72,9 @@ fun BottomNavigationBar(
 private fun getBottomNavigationItems() =
     listOf(
         BottomNavItem(
-            R.string.bottom_navigation_live_feed,
-            R.drawable.ic_music_library,
-            NavigationScreens.LiveFeed, // Use object instance
-        ),
-        BottomNavItem(
-            R.string.bottom_navigation_albums,
-            R.drawable.ic_music_library,
-            NavigationScreens.AlbumList, // Use object instance
-        ),
-        BottomNavItem(
-            R.string.bottom_navigation_birth_day,
-            R.drawable.ic_music_library,
-            NavigationScreens.BirthDayList, // Use object instance
+            R.string.bottom_navigation_favorites,
+            R.drawable.ic_favorite,
+            NavigationScreens.FavouriteGames,
         ),
     )
 

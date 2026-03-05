@@ -3,7 +3,9 @@ package com.simovic.simplegaming.base
 import android.app.Application
 import com.simovic.simplegaming.BuildConfig
 import com.simovic.simplegaming.feature.album.featureAlbumModules
+import com.simovic.simplegaming.feature.auth.featureAuthModules
 import com.simovic.simplegaming.feature.birthday.featureBirthDayModules
+import com.simovic.simplegaming.feature.games.featureGamesModules
 import com.simovic.simplegaming.feature.livefeed.featureLiveFeedModules
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -24,9 +26,11 @@ class Application : Application() {
             androidContext(this@Application)
 
             modules(appModule)
+            modules(featureAuthModules)
             modules(featureAlbumModules)
             modules(featureLiveFeedModules)
             modules(featureBirthDayModules)
+            modules(featureGamesModules)
         }
     }
 

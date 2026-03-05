@@ -24,8 +24,11 @@ import com.simovic.simplegaming.base.presentation.navigation.NavigationScreens
 import com.simovic.simplegaming.base.presentation.util.NavigationDestinationLogger
 import com.simovic.simplegaming.feature.album.presentation.screen.albumdetail.AlbumDetailScreen
 import com.simovic.simplegaming.feature.album.presentation.screen.albumlist.AlbumListScreen
+import com.simovic.simplegaming.feature.auth.presentation.screen.temp.TempScreen
 import com.simovic.simplegaming.feature.birthday.presentation.screen.birthdayadd.BirthDayAddScreen
 import com.simovic.simplegaming.feature.birthday.presentation.screen.birthdaylist.BirthDayScreen
+import com.simovic.simplegaming.feature.games.presentation.screen.addgame.AddGameScreen
+import com.simovic.simplegaming.feature.games.presentation.screen.favouritegames.FavouriteGamesScreen
 import com.simovic.simplegaming.feature.livefeed.domain.model.FeedItem
 import com.simovic.simplegaming.feature.livefeed.presentation.screen.livefeed.LiveFeedScreen
 import com.simovic.simplegaming.feature.livefeed.presentation.screen.livefeeddetails.LiveFeedDetailsScreen
@@ -74,7 +77,7 @@ private fun MainNavHost(
 ) {
     NavHost(
         navController = navController,
-        startDestination = NavigationScreens.LiveFeed,
+        startDestination = NavigationScreens.FavouriteGames,
         modifier = modifier,
     ) {
         composable<NavigationScreens.AlbumList> {
@@ -107,6 +110,22 @@ private fun MainNavHost(
                 },
             )
         }
+        composable<NavigationScreens.FavouriteGames> {
+            LaunchedEffect(Unit) {
+                scaffoldController.setFabConfig(
+                    config = FabConfig(onClick = { actions.toAddGame() }),
+                )
+            }
+            DisposableEffect(Unit) {
+                onDispose { scaffoldController.clearFabConfig() }
+            }
+            FavouriteGamesScreen()
+        }
+        composable<NavigationScreens.AddGame> {
+            AddGameScreen(
+                onNavigateBack = { actions.navigateUp() },
+            )
+        }
         composable<NavigationScreens.BirthDayList> {
             LaunchedEffect(Unit) {
                 scaffoldController.setFabConfig(
@@ -122,6 +141,9 @@ private fun MainNavHost(
             BirthDayAddScreen(
                 onFinish = { actions.navigateUp() },
             )
+        }
+        composable<NavigationScreens.Temp> {
+            TempScreen()
         }
     }
 }
@@ -157,5 +179,9 @@ data class MainActions(
 
     val toBirthDayAdd: () -> Unit = {
         navController.navigate(NavigationScreens.BirthDayAdd)
+    }
+
+    val toAddGame: () -> Unit = {
+        navController.navigate(NavigationScreens.AddGame)
     }
 }

@@ -18,12 +18,17 @@ internal class AlbumListViewModel(
 ) : BaseViewModel<AlbumListUiState, AlbumListAction>(AlbumListUiState.Loading) {
     private val query = MutableStateFlow("")
 
+    companion object {
+        private const val SEARCH_DEBOUNCE_MS = 500L
+        private const val MIN_QUERY_LENGTH = 2
+    }
+
     init {
         viewModelScope.launch {
             query
-                .debounce(500)
+                .debounce(SEARCH_DEBOUNCE_MS)
                 .distinctUntilChanged()
-                .filter { it.isBlank() || it.length >= 2 }
+                .filter { it.isBlank() || it.length >= MIN_QUERY_LENGTH }
                 .collectLatest { currentQuery ->
                     sendAction(AlbumListAction.AlbumListLoadStart)
                     when (val result = getAlbumListUseCase(currentQuery)) {

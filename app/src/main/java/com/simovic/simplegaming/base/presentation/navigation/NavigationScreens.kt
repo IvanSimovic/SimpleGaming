@@ -25,4 +25,10 @@ sealed interface NavigationScreens {
     @Serializable object BirthDayList : NavigationScreens
 
     @Serializable object BirthDayAdd : NavigationScreens
+
+    @Serializable object FavouriteGames : NavigationScreens
+
+    @Serializable object AddGame : NavigationScreens
+
+    @Serializable object Temp : NavigationScreens
 }
