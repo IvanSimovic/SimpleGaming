@@ -269,6 +269,14 @@ Detekt is the tool that tells you what you already feel. A function flagged for 
 
 ---
 
+## Accessibility — Every Human
+
+The app is used by people you will never meet, including people who cannot see the screen. A screen reader speaks the interface to them. When an element has no content description, the reader has nothing to say — that button, that image, that action simply doesn't exist for that person.
+
+Accessibility descriptions are part of the product, not metadata. They carry meaning, they get translated, and they shape the experience for a real human. Treat them with the same care as any other user-facing string in the app.
+
+---
+
 ## The Feeling
 
 You love a codebase where every part knows exactly what it is. Where boundaries are clear and each layer trusts the others to do their job. Where a change in one place ripples correctly through the system because everything is connected the way it should be.

@@ -3,6 +3,7 @@
 package com.simovic.simplegaming.feature.reels.presentation.screen.reels
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -30,6 +31,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -45,6 +49,7 @@ import coil.compose.AsyncImage
 import com.simovic.simplegaming.R
 import com.simovic.simplegaming.base.common.res.Dimen
 import com.simovic.simplegaming.base.presentation.compose.composable.ErrorAnim
+import com.simovic.simplegaming.base.presentation.compose.composable.FullScreenImageViewer
 import com.simovic.simplegaming.base.presentation.compose.composable.rememberShimmerBrush
 import com.simovic.simplegaming.base.presentation.ui.AppTheme
 import com.simovic.simplegaming.feature.reels.domain.model.ReelGame
@@ -123,6 +128,8 @@ private fun ReelPage(
     isFavourite: Boolean,
     onToggleFavourite: () -> Unit,
 ) {
+    var selectedScreenshotIndex by rememberSaveable { mutableStateOf<Int?>(null) }
+
     Box(modifier = Modifier.fillMaxSize()) {
         AsyncImage(
             model = game.heroImage,
@@ -163,6 +170,7 @@ private fun ReelPage(
 
         GameInfoColumn(
             game = game,
+            onScreenshotClick = { index -> selectedScreenshotIndex = index },
             modifier =
                 Modifier
                     .align(Alignment.BottomStart)
@@ -171,12 +179,21 @@ private fun ReelPage(
                     .padding(horizontal = Dimen.screenContentPadding)
                     .padding(bottom = Dimen.spaceL),
         )
+
+        selectedScreenshotIndex?.let { index ->
+            FullScreenImageViewer(
+                images = game.screenshots,
+                initialIndex = index,
+                onDismiss = { selectedScreenshotIndex = null },
+            )
+        }
     }
 }
 
 @Composable
 private fun GameInfoColumn(
     game: ReelGame,
+    onScreenshotClick: (Int) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(
@@ -210,7 +227,7 @@ private fun GameInfoColumn(
         }
 
         if (game.screenshots.isNotEmpty()) {
-            ScreenshotRow(screenshots = game.screenshots)
+            ScreenshotRow(screenshots = game.screenshots, onImageClick = onScreenshotClick)
         }
 
         PlatformRow(playtime = game.playtime, platforms = game.platforms)
@@ -239,20 +256,24 @@ private fun MetacriticRatingRow(
 }
 
 @Composable
-private fun ScreenshotRow(screenshots: List<String>) {
+private fun ScreenshotRow(
+    screenshots: List<String>,
+    onImageClick: (Int) -> Unit,
+) {
     LazyRow(
         horizontalArrangement = Arrangement.spacedBy(Dimen.spaceM),
         contentPadding = PaddingValues(0.dp),
     ) {
-        items(screenshots) { url ->
+        items(screenshots.size) { index ->
             AsyncImage(
-                model = url,
+                model = screenshots[index],
                 contentDescription = null,
                 contentScale = ContentScale.Crop,
                 modifier =
                     Modifier
                         .size(width = 120.dp, height = 68.dp)
-                        .clip(RoundedCornerShape(Dimen.spaceM)),
+                        .clip(RoundedCornerShape(Dimen.spaceM))
+                        .clickable { onImageClick(index) },
             )
         }
     }
