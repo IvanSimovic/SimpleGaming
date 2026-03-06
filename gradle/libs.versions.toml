@@ -17,12 +17,10 @@ navigation = "2.9.5"
 test-logger = "4.0.0"
 coroutines = "1.10.2"
 retrofit = "3.0.0"
-tikxml = "0.8.13"
 okhttp = "5.1.0"
 koin = "4.1.1"
 coil = "2.7.0"
 lifecycle = "2.9.4"
-room = "2.8.1"
 serialization-json = "1.9.0"
 kotlinx-serialization-converter = "1.0.0"
 timber = "5.0.1"
@@ -93,10 +91,6 @@ aboutlibraries-compose = { module = "com.mikepenz:aboutlibraries-compose-m3", ve
 kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "kotlin" }
 coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
 retrofit-core = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
-tikxml-core = { module = "com.tickaroo.tikxml:core", version.ref = "tikxml" }
-tikxml-annotation = { module = "com.tickaroo.tikxml:annotation", version.ref = "tikxml" }
-tikxml-retrofit = { module = "com.tickaroo.tikxml:retrofit-converter", version.ref = "tikxml" }
-tikxml-compiler = { module = "com.tickaroo.tikxml:processor", version.ref = "tikxml" }
 kotlinx-serialization-converter = { module = "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter", version.ref = "kotlinx-serialization-converter" }
 serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "serialization-json" }
 # Retrofit will use okhttp 4 (it has binary capability with okhttp 3)
@@ -117,11 +111,7 @@ core-splashscreen = { module = "androidx.core:core-splashscreen", version.ref = 
 viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
 compose-ui = { module = "androidx.compose.ui:ui", version.ref = "compose" }
 tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "compose" }
-room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
-room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
-room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
 konsist = { module = "com.lemonappdev:konsist", version.ref = "konsist" }
-datepicker = { module = "com.github.anhaki:PickTime-Compose", version = "1.1.5" }
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebase-bom" }
 firebase-auth = { module = "com.google.firebase:firebase-auth" }
 firebase-firestore = { module = "com.google.firebase:firebase-firestore" }
@@ -163,12 +153,6 @@ retrofit = [
     "okhttp-interceptor"
 ]
 
-tikxml = [
-    "tikxml-core",
-    "tikxml-annotation",
-    "tikxml-retrofit",
-]
-
 koin = ["koin", "koin-compose", "koin-navigation"]
 
 compose = [
@@ -180,11 +164,6 @@ compose = [
     "compose-bom",
     "compose-ui-tooling",
     "compose-icons"
-]
-
-room = [
-    "room-ktx",
-    "room-runtime"
 ]
 
 firebase = [

@@ -5,7 +5,6 @@ plugins {
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.kotlin.symbol.processing)
     alias(libs.plugins.google.services)
-    id("org.jetbrains.kotlin.kapt")
 }
 
 android {
@@ -29,8 +28,6 @@ android {
         versionName = "1.0"
 
         defaultConfig {
-            buildConfigField("String", "apiBaseUrl", "${project.findProperty("apiBaseUrl") ?: ""}")
-            buildConfigField("String", "apiToken", "${project.findProperty("apiToken") ?: ""}")
             buildConfigField("String", "rawgApiKey", "${project.findProperty("rawgApiKey") ?: ""}")
         }
 
@@ -65,7 +62,6 @@ android {
     }
 
     buildFeatures {
-        viewBinding = true
         buildConfig = true
         compose = true
     }
@@ -101,18 +97,12 @@ dependencies {
     debugImplementation(libs.compose.ui.test.manifest)
     implementation(libs.navigation.compose)
 
-    // Room
-    implementation(libs.bundles.room)
-    ksp(libs.room.compiler)
-
     // Koin
     implementation(platform(libs.koin.bom))
     implementation(libs.bundles.koin)
 
     // Retrofit
     implementation(libs.bundles.retrofit)
-    implementation(libs.bundles.tikxml)
-    kapt(libs.tikxml.compiler)
 
     // Lifecycle & UI
     implementation(libs.viewmodel.ktx)
@@ -122,9 +112,6 @@ dependencies {
     implementation(platform(libs.firebase.bom))
     implementation(libs.bundles.firebase)
     implementation(libs.coroutines.play.services)
-
-    // Date picker
-    implementation(libs.datepicker)
 
     // Test
     testImplementation(libs.bundles.test)

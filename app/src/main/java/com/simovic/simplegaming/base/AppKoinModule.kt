@@ -3,18 +3,13 @@ package com.simovic.simplegaming.base
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import com.simovic.simplegaming.BuildConfig
 import com.simovic.simplegaming.base.data.retrofit.apiresult.ApiResultAdapterFactory
-import com.simovic.simplegaming.base.data.retrofit.interceptor.AuthenticationInterceptor
-import com.simovic.simplegaming.base.data.retrofit.interceptor.UserAgentInterceptor
 import com.simovic.simplegaming.base.presentation.AppViewModel
 import com.simovic.simplegaming.base.presentation.ScaffoldController
-import com.tickaroo.tikxml.TikXml
-import com.tickaroo.tikxml.retrofit.TikXmlConverterFactory
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import org.koin.core.module.dsl.singleOf
 import org.koin.core.module.dsl.viewModel
 import org.koin.core.module.dsl.viewModelOf
 import org.koin.core.qualifier.named
@@ -25,21 +20,9 @@ import timber.log.Timber
 val appModule =
     module {
 
-        single { AuthenticationInterceptor(BuildConfig.apiToken) }
-
         viewModel { ScaffoldController() }
 
         viewModelOf(::AppViewModel)
-
-        singleOf(::UserAgentInterceptor)
-
-        single {
-            HttpLoggingInterceptor { message ->
-                Timber.d("Http: $message")
-            }.apply {
-                level = HttpLoggingInterceptor.Level.BODY
-            }
-        }
 
         /*
          * OkHttp logging interceptor with custom Timber logger.
@@ -72,36 +55,11 @@ val appModule =
         }
 
         single {
-            OkHttpClient
-                .Builder()
-                .apply {
-                    if (BuildConfig.DEBUG) {
-                        addInterceptor(get<HttpLoggingInterceptor>())
-                    }
-                    addInterceptor(get<AuthenticationInterceptor>())
-                    addInterceptor(get<UserAgentInterceptor>())
-                }.build()
-        }
-
-        single {
             Json {
                 // By default Kotlin serialization will serialize all of the keys present in JSON object and throw an
                 // exception if given key is not present in the Kotlin class. This flag allows to ignore JSON fields
                 ignoreUnknownKeys = true
             }
-        }
-
-        single {
-            val contentType = "application/json".toMediaType()
-
-            @OptIn(ExperimentalSerializationApi::class)
-            Retrofit
-                .Builder()
-                .baseUrl(BuildConfig.apiBaseUrl)
-                .addConverterFactory(get<Json>().asConverterFactory(contentType))
-                .client(get())
-                .addCallAdapterFactory(ApiResultAdapterFactory())
-                .build()
         }
 
         single(named("rawgOkHttp")) {
@@ -141,19 +99,5 @@ val appModule =
                 .client(get(named("rawgOkHttp")))
                 .addCallAdapterFactory(ApiResultAdapterFactory())
                 .build()
-        }
-
-        single(named("xmlRetrofit")) {
-            Retrofit
-                .Builder()
-                .baseUrl("https://indiegamesplus.com/")
-                .addConverterFactory(
-                    TikXmlConverterFactory.create(
-                        TikXml
-                            .Builder()
-                            .exceptionOnUnreadXml(false)
-                            .build(),
-                    ),
-                ).build()
         }
     }
