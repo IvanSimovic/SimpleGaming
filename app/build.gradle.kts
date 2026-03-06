@@ -31,6 +31,7 @@ android {
         defaultConfig {
             buildConfigField("String", "apiBaseUrl", "${project.findProperty("apiBaseUrl") ?: ""}")
             buildConfigField("String", "apiToken", "${project.findProperty("apiToken") ?: ""}")
+            buildConfigField("String", "rawgApiKey", "${project.findProperty("rawgApiKey") ?: ""}")
         }
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"

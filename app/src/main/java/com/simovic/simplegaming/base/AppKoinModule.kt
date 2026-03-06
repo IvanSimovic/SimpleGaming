@@ -84,21 +84,61 @@ val appModule =
         }
 
         single {
-            val contentType = "application/json".toMediaType()
+            Json {
+                // By default Kotlin serialization will serialize all of the keys present in JSON object and throw an
+                // exception if given key is not present in the Kotlin class. This flag allows to ignore JSON fields
+                ignoreUnknownKeys = true
+            }
+        }
 
-            val json =
-                Json {
-                    // By default Kotlin serialization will serialize all of the keys present in JSON object and throw an
-                    // exception if given key is not present in the Kotlin class. This flag allows to ignore JSON fields
-                    ignoreUnknownKeys = true
-                }
+        single {
+            val contentType = "application/json".toMediaType()
 
             @OptIn(ExperimentalSerializationApi::class)
             Retrofit
                 .Builder()
                 .baseUrl(BuildConfig.apiBaseUrl)
-                .addConverterFactory(json.asConverterFactory(contentType))
+                .addConverterFactory(get<Json>().asConverterFactory(contentType))
                 .client(get())
+                .addCallAdapterFactory(ApiResultAdapterFactory())
+                .build()
+        }
+
+        single(named("rawgOkHttp")) {
+            OkHttpClient
+                .Builder()
+                .apply {
+                    if (BuildConfig.DEBUG) {
+                        addInterceptor(get<HttpLoggingInterceptor>())
+                    }
+                    addInterceptor { chain ->
+                        val url =
+                            chain
+                                .request()
+                                .url
+                                .newBuilder()
+                                .addQueryParameter("key", BuildConfig.rawgApiKey)
+                                .build()
+                        chain.proceed(
+                            chain
+                                .request()
+                                .newBuilder()
+                                .url(url)
+                                .build(),
+                        )
+                    }
+                }.build()
+        }
+
+        single(named("rawgRetrofit")) {
+            val contentType = "application/json".toMediaType()
+
+            @OptIn(ExperimentalSerializationApi::class)
+            Retrofit
+                .Builder()
+                .baseUrl("https://api.rawg.io/api/")
+                .addConverterFactory(get<Json>().asConverterFactory(contentType))
+                .client(get(named("rawgOkHttp")))
                 .addCallAdapterFactory(ApiResultAdapterFactory())
                 .build()
         }

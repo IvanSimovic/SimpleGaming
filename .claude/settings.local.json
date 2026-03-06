@@ -4,7 +4,12 @@
       "Bash(./gradlew assembleDebug:*)",
       "Bash(./gradlew assembleRelease:*)",
       "Bash(./gradlew spotlessApply:*)",
-      "Bash(./gradlew detekt:*)"
+      "Bash(./gradlew detekt:*)",
+      "Bash(./gradlew spotlessCheck:*)",
+      "Bash(./gradlew :app:spotlessApply:*)",
+      "Bash(./gradlew :app:detekt:*)",
+      "Bash(grep:*)",
+      "Bash(./gradlew :app:detektApply:*)"
     ]
   }
 }

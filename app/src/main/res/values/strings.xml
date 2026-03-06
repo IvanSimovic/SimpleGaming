@@ -31,4 +31,7 @@
     <string name="clear_search">Clear search</string>
     <string name="sign_out">Sign Out</string>
     <string name="bottom_navigation_temp">Home</string>
+    <string name="favourite_games_title">Favourite Games</string>
+    <string name="favourite_games_empty">No favourites yet. Tap + to add your first game.</string>
+    <string name="add_game_title">Add Game</string>
 </resources>
