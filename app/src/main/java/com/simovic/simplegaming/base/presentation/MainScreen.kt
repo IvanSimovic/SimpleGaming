@@ -23,6 +23,7 @@ import com.simovic.simplegaming.base.presentation.navigation.NavigationScreens
 import com.simovic.simplegaming.base.presentation.util.NavigationDestinationLogger
 import com.simovic.simplegaming.feature.games.presentation.screen.addgame.AddGameScreen
 import com.simovic.simplegaming.feature.games.presentation.screen.favouritegames.FavouriteGamesScreen
+import com.simovic.simplegaming.feature.reels.presentation.screen.reels.ReelsScreen
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
@@ -86,6 +87,9 @@ private fun MainNavHost(
             AddGameScreen(
                 onNavigateBack = { actions.navigateUp() },
             )
+        }
+        composable<NavigationScreens.Reels> {
+            ReelsScreen()
         }
     }
 }

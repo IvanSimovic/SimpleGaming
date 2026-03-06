@@ -11,4 +11,6 @@
     <string name="favourite_games_title">Favourite Games</string>
     <string name="favourite_games_empty">No favourites yet. Tap + to add your first game.</string>
     <string name="add_game_title">Add Game</string>
+    <string name="bottom_navigation_reels">Reels</string>
+    <string name="reels_toggle_favourite">Toggle favourite</string>
 </resources>

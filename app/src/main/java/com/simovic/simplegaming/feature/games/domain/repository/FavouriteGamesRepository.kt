@@ -12,4 +12,9 @@ interface FavouriteGamesRepository {
         userId: String,
         game: Game,
     ): Result<Unit>
+
+    suspend fun removeFavouriteGame(
+        userId: String,
+        gameId: String,
+    ): Result<Unit>
 }

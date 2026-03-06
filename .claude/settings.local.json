@@ -11,7 +11,8 @@
       "Bash(grep:*)",
       "Bash(./gradlew :app:detektApply:*)",
       "Bash(./gradlew :app:compileDebugKotlin:*)",
-      "Bash(./gradlew:*)"
+      "Bash(./gradlew:*)",
+      "WebFetch(domain:api.rawg.io)"
     ]
   }
 }

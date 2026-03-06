@@ -11,6 +11,9 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.tasks.await
 
+private const val COLLECTION_USERS = "users"
+private const val COLLECTION_FAVOURITE_GAMES = "favouriteGames"
+
 internal class FavouriteGamesFirestore(
     private val firestore: FirebaseFirestore,
 ) {
@@ -18,9 +21,9 @@ internal class FavouriteGamesFirestore(
         callbackFlow {
             val collection =
                 firestore
-                    .collection("users")
+                    .collection(COLLECTION_USERS)
                     .document(userId)
-                    .collection("favouriteGames")
+                    .collection(COLLECTION_FAVOURITE_GAMES)
 
             val listener =
                 collection.addSnapshotListener { snapshot, error ->
@@ -57,11 +60,24 @@ internal class FavouriteGamesFirestore(
                 "addedAt" to FieldValue.serverTimestamp(),
             )
         firestore
-            .collection("users")
+            .collection(COLLECTION_USERS)
             .document(userId)
-            .collection("favouriteGames")
+            .collection(COLLECTION_FAVOURITE_GAMES)
             .document(game.id)
             .set(data)
+            .await()
+    }
+
+    suspend fun removeFavouriteGame(
+        userId: String,
+        gameId: String,
+    ) {
+        firestore
+            .collection(COLLECTION_USERS)
+            .document(userId)
+            .collection(COLLECTION_FAVOURITE_GAMES)
+            .document(gameId)
+            .delete()
             .await()
     }
 }

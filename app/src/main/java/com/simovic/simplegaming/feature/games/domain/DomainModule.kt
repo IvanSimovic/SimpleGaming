@@ -4,6 +4,7 @@ import com.simovic.simplegaming.feature.auth.domain.usecase.GetCurrentUserIdUseC
 import com.simovic.simplegaming.feature.games.domain.model.UserConfig
 import com.simovic.simplegaming.feature.games.domain.usecase.AddFavouriteGameUseCase
 import com.simovic.simplegaming.feature.games.domain.usecase.GetFavouriteGamesUseCase
+import com.simovic.simplegaming.feature.games.domain.usecase.RemoveFavouriteGameUseCase
 import com.simovic.simplegaming.feature.games.domain.usecase.SearchGamesUseCase
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
@@ -14,5 +15,6 @@ internal val domainModule =
 
         singleOf(::GetFavouriteGamesUseCase)
         singleOf(::AddFavouriteGameUseCase)
+        singleOf(::RemoveFavouriteGameUseCase)
         singleOf(::SearchGamesUseCase)
     }

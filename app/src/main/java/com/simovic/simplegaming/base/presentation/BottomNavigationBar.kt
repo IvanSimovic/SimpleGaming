@@ -76,6 +76,11 @@ private fun getBottomNavigationItems() =
             R.drawable.ic_favorite,
             NavigationScreens.FavouriteGames,
         ),
+        BottomNavItem(
+            R.string.bottom_navigation_reels,
+            R.drawable.ic_play_arrow,
+            NavigationScreens.Reels,
+        ),
     )
 
 data class BottomNavItem(

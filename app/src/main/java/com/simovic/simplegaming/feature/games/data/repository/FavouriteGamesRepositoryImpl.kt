@@ -31,4 +31,15 @@ internal class FavouriteGamesRepositoryImpl(
         } catch (e: Exception) {
             Result.Failure(e)
         }
+
+    override suspend fun removeFavouriteGame(
+        userId: String,
+        gameId: String,
+    ): Result<Unit> =
+        try {
+            dataSource.removeFavouriteGame(userId, gameId)
+            Result.Success(Unit)
+        } catch (e: Exception) {
+            Result.Failure(e)
+        }
 }
