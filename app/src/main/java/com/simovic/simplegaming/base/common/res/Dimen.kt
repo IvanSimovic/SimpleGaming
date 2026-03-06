@@ -10,5 +10,5 @@ object Dimen {
     val spaceXXL = 64.dp
     val screenContentPadding = spaceL
     val imageSize = 100.dp
-    val textHeight = 14.dp
+    val cardElevation = 2.dp
 }

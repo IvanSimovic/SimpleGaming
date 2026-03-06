@@ -3,14 +3,14 @@ package com.simovic.simplegaming.feature.games.presentation
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Card
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -19,7 +19,7 @@ import com.simovic.simplegaming.base.presentation.compose.composable.AppPreview
 import com.simovic.simplegaming.base.presentation.compose.composable.rememberShimmerBrush
 
 private const val SHIMMER_ITEM_COUNT = 6
-private const val SHIMMER_TEXT_WIDTH_FRACTION = 0.65f
+private const val GAME_CARD_ASPECT_RATIO = 0.75f
 
 @Composable
 internal fun GameGridShimmer(modifier: Modifier = Modifier) {
@@ -36,22 +36,11 @@ internal fun GameGridShimmer(modifier: Modifier = Modifier) {
         userScrollEnabled = false,
     ) {
         items(SHIMMER_ITEM_COUNT) {
-            Column {
-                Box(
-                    modifier =
-                        Modifier
-                            .aspectRatio(1f)
-                            .fillMaxWidth()
-                            .background(brush),
-                )
-                Box(
-                    modifier =
-                        Modifier
-                            .padding(top = Dimen.spaceS)
-                            .fillMaxWidth(SHIMMER_TEXT_WIDTH_FRACTION)
-                            .height(Dimen.textHeight)
-                            .background(brush),
-                )
+            Card(
+                shape = RoundedCornerShape(Dimen.spaceM),
+                modifier = Modifier.fillMaxWidth().aspectRatio(GAME_CARD_ASPECT_RATIO),
+            ) {
+                Box(modifier = Modifier.fillMaxSize().background(brush))
             }
         }
     }

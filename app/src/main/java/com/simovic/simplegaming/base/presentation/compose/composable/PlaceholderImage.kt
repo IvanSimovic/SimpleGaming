@@ -1,11 +1,13 @@
 package com.simovic.simplegaming.base.presentation.compose.composable
 
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -25,6 +27,7 @@ fun PlaceholderImage(
     url: Any?,
     contentDescription: String?,
     modifier: Modifier = Modifier,
+    contentScale: ContentScale = ContentScale.Fit,
 ) {
     Surface(modifier = modifier) {
         val randomPlaceHolder by rememberSaveable {
@@ -42,6 +45,8 @@ fun PlaceholderImage(
             model = model,
             contentDescription = contentDescription,
             placeholder = painterResource(randomPlaceHolder),
+            contentScale = contentScale,
+            modifier = Modifier.fillMaxSize(),
         )
     }
 }
