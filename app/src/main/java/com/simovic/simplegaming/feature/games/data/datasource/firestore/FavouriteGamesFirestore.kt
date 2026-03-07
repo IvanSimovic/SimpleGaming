@@ -48,6 +48,17 @@ internal class FavouriteGamesFirestore(
         )
     }
 
+    suspend fun getFavouriteGameIds(userId: String): Set<String> =
+        firestore
+            .collection(COLLECTION_USERS)
+            .document(userId)
+            .collection(COLLECTION_FAVOURITE_GAMES)
+            .get()
+            .await()
+            .documents
+            .mapNotNull { it.getString("gameId") }
+            .toSet()
+
     suspend fun addFavouriteGame(
         userId: String,
         game: Game,

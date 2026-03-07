@@ -8,6 +8,8 @@ import kotlinx.coroutines.flow.Flow
 interface FavouriteGamesRepository {
     fun getFavouriteGames(userId: String): Flow<Result<List<FavouriteGame>>>
 
+    suspend fun getFavouriteGameIds(userId: String): Result<Set<String>>
+
     suspend fun addFavouriteGame(
         userId: String,
         game: Game,

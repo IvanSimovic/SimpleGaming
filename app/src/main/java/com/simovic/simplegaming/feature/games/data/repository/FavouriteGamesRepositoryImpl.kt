@@ -21,6 +21,13 @@ internal class FavouriteGamesRepositoryImpl(
             }
         }
 
+    override suspend fun getFavouriteGameIds(userId: String): Result<Set<String>> =
+        try {
+            Result.Success(dataSource.getFavouriteGameIds(userId))
+        } catch (e: Exception) {
+            Result.Failure(e)
+        }
+
     override suspend fun addFavouriteGame(
         userId: String,
         game: Game,
