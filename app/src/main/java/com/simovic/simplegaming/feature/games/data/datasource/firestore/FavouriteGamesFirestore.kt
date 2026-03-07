@@ -13,6 +13,10 @@ import kotlinx.coroutines.tasks.await
 
 private const val COLLECTION_USERS = "users"
 private const val COLLECTION_FAVOURITE_GAMES = "favouriteGames"
+private const val FIELD_GAME_ID = "gameId"
+private const val FIELD_NAME = "name"
+private const val FIELD_IMAGE_URL = "imageUrl"
+private const val FIELD_ADDED_AT = "addedAt"
 
 internal class FavouriteGamesFirestore(
     private val firestore: FirebaseFirestore,
@@ -38,13 +42,13 @@ internal class FavouriteGamesFirestore(
         }
 
     private fun parseDocument(doc: DocumentSnapshot): FavouriteGameFirestoreModel? {
-        val gameId = doc.getString("gameId") ?: return null
-        val name = doc.getString("name") ?: return null
+        val gameId = doc.getString(FIELD_GAME_ID) ?: return null
+        val name = doc.getString(FIELD_NAME) ?: return null
         return FavouriteGameFirestoreModel(
             gameId = gameId,
             name = name,
-            imageUrl = doc.getString("imageUrl") ?: "",
-            addedAt = doc.getTimestamp("addedAt")?.toDate()?.time ?: 0L,
+            imageUrl = doc.getString(FIELD_IMAGE_URL) ?: "",
+            addedAt = doc.getTimestamp(FIELD_ADDED_AT)?.toDate()?.time ?: 0L,
         )
     }
 
@@ -56,7 +60,7 @@ internal class FavouriteGamesFirestore(
             .get()
             .await()
             .documents
-            .mapNotNull { it.getString("gameId") }
+            .mapNotNull { it.getString(FIELD_GAME_ID) }
             .toSet()
 
     suspend fun addFavouriteGame(
@@ -65,10 +69,10 @@ internal class FavouriteGamesFirestore(
     ) {
         val data =
             mapOf(
-                "gameId" to game.id,
-                "name" to game.name,
-                "imageUrl" to game.imageUrl,
-                "addedAt" to FieldValue.serverTimestamp(),
+                FIELD_GAME_ID to game.id,
+                FIELD_NAME to game.name,
+                FIELD_IMAGE_URL to game.imageUrl,
+                FIELD_ADDED_AT to FieldValue.serverTimestamp(),
             )
         firestore
             .collection(COLLECTION_USERS)

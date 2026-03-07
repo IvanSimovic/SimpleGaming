@@ -28,6 +28,15 @@ internal sealed interface ReelsAction : BaseAction<ReelsUiState> {
         }
     }
 
+    data class AppendPages(
+        val ids: List<String>,
+    ) : ReelsAction {
+        override fun reduce(state: ReelsUiState): ReelsUiState {
+            if (state !is ReelsUiState.Content) return state
+            return state.copy(pages = state.pages + ids.map { ReelPageState.Loading })
+        }
+    }
+
     data class UpdateFavouriteIds(
         val ids: Set<String>,
     ) : ReelsAction {
