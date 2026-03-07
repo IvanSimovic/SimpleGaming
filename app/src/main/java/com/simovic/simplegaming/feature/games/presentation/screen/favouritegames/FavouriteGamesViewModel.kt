@@ -5,10 +5,12 @@ import com.simovic.simplegaming.base.domain.result.Result
 import com.simovic.simplegaming.base.presentation.viewmodel.BaseViewModel
 import com.simovic.simplegaming.feature.games.domain.model.FavouriteGame
 import com.simovic.simplegaming.feature.games.domain.usecase.GetFavouriteGamesUseCase
+import com.simovic.simplegaming.feature.games.domain.usecase.RemoveFavouriteGameUseCase
 import kotlinx.coroutines.launch
 
 internal class FavouriteGamesViewModel(
     private val getFavouriteGames: GetFavouriteGamesUseCase,
+    private val removeFavouriteGame: RemoveFavouriteGameUseCase,
 ) : BaseViewModel<FavouriteGamesUiState, FavouriteGamesAction>(FavouriteGamesUiState.Loading) {
     init {
         viewModelScope.launch {
@@ -19,6 +21,10 @@ internal class FavouriteGamesViewModel(
                 }
             }
         }
+    }
+
+    fun removeGame(gameId: String) {
+        viewModelScope.launch { removeFavouriteGame(gameId) }
     }
 
     private fun List<FavouriteGame>.toUiModels() =

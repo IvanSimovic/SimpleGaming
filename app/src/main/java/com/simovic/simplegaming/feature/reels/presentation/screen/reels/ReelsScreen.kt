@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
@@ -43,6 +42,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
@@ -68,7 +68,10 @@ private val ScrimBottom =
     )
 
 @Composable
-internal fun ReelsScreen(modifier: Modifier = Modifier) {
+internal fun ReelsScreen(
+    modifier: Modifier = Modifier,
+    contentBottomPadding: Dp = 0.dp,
+) {
     val viewModel: ReelsViewModel = koinViewModel()
     val uiState by viewModel.uiStateFlow.collectAsStateWithLifecycle()
 
@@ -81,7 +84,7 @@ internal fun ReelsScreen(modifier: Modifier = Modifier) {
                 Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) { ErrorAnim() }
             }
             is ReelsUiState.Content -> {
-                ReelsPager(state = state, viewModel = viewModel)
+                ReelsPager(state = state, viewModel = viewModel, contentBottomPadding = contentBottomPadding)
             }
         }
     }
@@ -91,6 +94,7 @@ internal fun ReelsScreen(modifier: Modifier = Modifier) {
 private fun ReelsPager(
     state: ReelsUiState.Content,
     viewModel: ReelsViewModel,
+    contentBottomPadding: Dp,
 ) {
     val pagerState = rememberPagerState { state.pages.size }
 
@@ -116,6 +120,7 @@ private fun ReelsPager(
                     game = page.game,
                     isFavourite = page.game.id in state.favouriteIds,
                     onToggleFavourite = { viewModel.toggleFavourite(page.game) },
+                    contentBottomPadding = contentBottomPadding,
                 )
             }
         }
@@ -127,6 +132,7 @@ private fun ReelPage(
     game: ReelGame,
     isFavourite: Boolean,
     onToggleFavourite: () -> Unit,
+    contentBottomPadding: Dp,
 ) {
     var selectedScreenshotIndex by rememberSaveable { mutableStateOf<Int?>(null) }
 
@@ -175,9 +181,8 @@ private fun ReelPage(
                 Modifier
                     .align(Alignment.BottomStart)
                     .fillMaxWidth()
-                    .navigationBarsPadding()
                     .padding(horizontal = Dimen.screenContentPadding)
-                    .padding(bottom = Dimen.spaceL),
+                    .padding(bottom = contentBottomPadding + Dimen.spaceL),
         )
 
         selectedScreenshotIndex?.let { index ->

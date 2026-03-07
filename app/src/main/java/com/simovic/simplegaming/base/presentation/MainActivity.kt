@@ -3,6 +3,7 @@ package com.simovic.simplegaming.base.presentation
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -13,6 +14,7 @@ class MainActivity : ComponentActivity() {
         val splashScreen = installSplashScreen()
 
         super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
 
         splashScreen.setKeepOnScreenCondition {
             appViewModel.uiStateFlow.value is AppUiState.Checking

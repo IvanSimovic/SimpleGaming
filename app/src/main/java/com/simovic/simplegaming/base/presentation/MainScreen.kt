@@ -1,5 +1,6 @@
 package com.simovic.simplegaming.base.presentation
 
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.FloatingActionButton
@@ -55,7 +56,7 @@ fun MainShowcaseScreen(
             navController = navController,
             actions = actions,
             scaffoldController = scaffoldController,
-            modifier = Modifier.padding(innerPadding),
+            innerPadding = innerPadding,
         )
     }
 }
@@ -65,12 +66,13 @@ private fun MainNavHost(
     navController: NavHostController,
     actions: MainActions,
     scaffoldController: ScaffoldController,
+    innerPadding: PaddingValues,
     modifier: Modifier = Modifier,
 ) {
     NavHost(
         navController = navController,
         startDestination = NavigationScreens.FavouriteGames,
-        modifier = modifier,
+        modifier = modifier.fillMaxSize(),
     ) {
         composable<NavigationScreens.FavouriteGames> {
             LaunchedEffect(Unit) {
@@ -81,15 +83,16 @@ private fun MainNavHost(
             DisposableEffect(Unit) {
                 onDispose { scaffoldController.clearFabConfig() }
             }
-            FavouriteGamesScreen()
+            FavouriteGamesScreen(modifier = Modifier.padding(innerPadding))
         }
         composable<NavigationScreens.AddGame> {
             AddGameScreen(
                 onNavigateBack = { actions.navigateUp() },
+                modifier = Modifier.padding(innerPadding),
             )
         }
         composable<NavigationScreens.Reels> {
-            ReelsScreen()
+            ReelsScreen(contentBottomPadding = innerPadding.calculateBottomPadding())
         }
     }
 }
