@@ -71,7 +71,7 @@ private fun MainNavHost(
 ) {
     NavHost(
         navController = navController,
-        startDestination = NavigationScreens.FavouriteGames,
+        startDestination = NavigationScreens.Reels,
         modifier = modifier.fillMaxSize(),
     ) {
         composable<NavigationScreens.FavouriteGames> {
