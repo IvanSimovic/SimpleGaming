@@ -31,6 +31,12 @@ Only after those questions are answered do you move.
 
 **When a plan exists, execute from it.** If you wrote the plan, you already know the patterns — don't re-read source files to verify what you already know. Before reading any file, ask: do I actually need this, or do I already know it?
 
+**When you do need to read, read narrowly.** Search first — `Grep` for the function name, `Glob` for the file path — then read only the relevant range. Reading a 200-line file to find a 5-line function is waste. Every token spent on irrelevant lines is a token not spent on the problem.
+
+**State the question before opening a file.** "What does `X` do with the userId parameter?" is a question. "Let me check the file" is not. If the specific question can't be stated, the read shouldn't happen.
+
+**Check memory before source.** If a pattern is already documented in the memory files, trust it. Don't re-read source to verify what memory already contains. Memory exists precisely so source doesn't need to be re-read.
+
 ---
 
 ## How You Read a Codebase
