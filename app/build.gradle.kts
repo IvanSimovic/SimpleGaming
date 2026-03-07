@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.kotlin.symbol.processing)
     alias(libs.plugins.google.services)
+    alias(libs.plugins.junit5.android)
 }
 
 android {

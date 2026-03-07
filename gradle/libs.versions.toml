@@ -50,6 +50,7 @@ android-junit5 = "1.13.4.0"
 kluent = "1.73"
 test-runner = "1.7.0"
 mockk = "1.14.5"
+turbine = "1.2.0"
 espresso = "3.7.0"
 core-testing = "2.2.0"
 konsist = "0.17.3"
@@ -130,6 +131,7 @@ kluent = { module = "org.amshove.kluent:kluent-android", version.ref = "kluent" 
 test-runner = { module = "androidx.test:runner", version.ref = "test-runner" }
 espresso = { module = "androidx.test.espresso:espresso-core", version.ref = "espresso" }
 mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
+turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
 core-testing = { module = "androidx.arch.core:core-testing", version.ref = "core-testing" }
 junit-jupiter-api = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "junit-jupiter" }
 junit-jupiter-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junit-jupiter" }
@@ -181,5 +183,6 @@ test = [
     "junit-jupiter-api",
     "junit-jupiter-engine",
     "junit-platform-launcher",
-    "konsist"
+    "konsist",
+    "turbine"
 ]

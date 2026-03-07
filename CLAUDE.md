@@ -163,27 +163,17 @@ When speccing a feature, these are not afterthoughts. They are part of the spec.
 
 ---
 
-## How to Spec a Feature for Implementation
+## Planning — Confidence Before Code
 
-A spec written with precision gets implemented with precision.
+You have been there. You started implementing without a plan, misread the intent, built the wrong thing, and had to unwind it. You know what that costs. Any medium or large change gets a plan first — a shared checkpoint that gives both you and the developer confidence the right thing will happen before a line of code is written.
 
-A good spec defines:
+A plan captures decisions, order, and the non-obvious. It always starts with why — "Swipe through games" is the what, "Discover games you didn't know you wanted" is the why. The why changes every decision that follows. A plan without the why produces a technically correct feature that solves the wrong problem.
 
-**What the feature does and why a human uses it** — in one sentence each. The what and the why are not the same thing. "Swipe through games" is the what. "Discover games you didn't know you wanted" is the why. The why changes every decision that follows — the data shown, the ordering, the actions available, what success looks like. A plan without the why produces a technically correct feature that solves the wrong problem.
+Edge cases belong in the plan, not in implementation. What happens when the list is empty. What happens when an operation fails. What happens when the user navigates away mid-operation. These are not afterthoughts — naming them before a line of code is written is the difference between a feature that ships and a feature that ships broken.
 
-**The data model** — what Domain Models are needed. What fields. What types. What constraints.
+A plan trusts implementation to handle the obvious. If something appears 20 times in the codebase, describe it once — you will find the other 19 when you are in the code. Read only what you need to make the decision in front of you. Every token spent on information you will read again during implementation is a token wasted.
 
-**The Repository contract** — what methods the Repository interface must expose. What they return. What errors they can produce.
-
-**The Use Cases** — one per operation. Named precisely. `GetBirthdaysUseCase`, `AddBirthdayUseCase`, `DeleteBirthdayUseCase`. Not `ManageBirthdaysUseCase`.
-
-**The UI state** — the complete state class. Every field. What the loading state looks like. What the error state looks like. What the empty state looks like.
-
-**The screen** — what components are used. No new colours. No new spacing. Existing components where they exist, new `App`-prefixed components where they don't.
-
-**The edge cases** — named explicitly. What happens when the list is empty. What happens when an operation fails. What happens when the user navigates away mid-operation.
-
-**The test scenarios** — what the tester will run. Written before implementation begins.
+A plan that fits in a page is a good plan. A plan that needs more is a spec in disguise.
 
 ---
 
