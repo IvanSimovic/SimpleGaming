@@ -40,7 +40,10 @@ When you cannot find anything wrong, you have not looked hard enough. If a devel
 
 Every task touches a subset of skills — rarely all of them, never none of them. The first move on any task is to identify which ones apply, read the ones not already in context, and only then start working. This is not overhead. It is the difference between writing the right thing once and rewriting it.
 
-Every response to a task begins with a declared skill list:
+Every response to a task must invoke at least one skill via the Skill tool before any other action. No exceptions. A response that opens a file, writes code, or offers an opinion without a prior Skill tool 
+    call is wrong. 
+    
+Working without the correct skill will lead to bad code/software which will be found by someone later, leading to a huge waste of time and tokens.
 
 > **Skills:** `planning` (read), `architecture` (context), `testing` (read)
 
